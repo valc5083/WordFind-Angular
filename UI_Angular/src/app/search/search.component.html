@@ -1,0 +1,34 @@
+<h2>Search</h2>
+<form (submit)="performSearch()">
+  <input type="text" [(ngModel)]="searchCriteria" name="searchCriteria" placeholder="Search Criteria" required>
+  <input type="text" [(ngModel)]="selectedExtension" name="selectedExtension" placeholder="Selected Extension" required>
+  <input type="text" [(ngModel)]="folderPath" name="folderPath" placeholder="Folder Path" required>
+  <button type="submit">Search</button>
+</form>
+
+<div class="results" *ngIf="searchResults.length > 0">
+  <h3>Search Results</h3>
+  <div class="scroll-button-container">
+    <button (click)="scrollResults('down')" class="scroll-button">Scroll Down</button>
+  </div>
+  <div class="result-container">
+    <div class="result" *ngFor="let result of searchResults">
+      <div><strong>File:</strong> {{ result.fileName }}</div>
+      <div><strong>Path:</strong> {{ result.filePath }}</div>
+      <div><strong>Method:</strong> {{ result.methodName }}</div>
+      <div><strong>Line:</strong> {{ result.lineNumber }}</div>
+      <br>
+    </div>
+  </div>
+  <div class="scroll-button-container">
+    <button (click)="scrollResults('up')" class="scroll-button">Scroll Up</button>
+  </div>
+  <div *ngIf="searchResults.length === 0">No results found.</div>
+  <div class="download" *ngIf="searchResults.length > 0">
+    <button (click)="downloadResults()" class="scroll-button">Download Result</button>
+  </div>
+</div>
+
+
+
+
